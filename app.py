@@ -9,13 +9,13 @@ from transformers import pipeline
 import json
 
 import os
-if "index_built" not in st.session_state.get("index_built", False):
+if not st.session_state.get("index_built", False):
     with st.spinner("First time setup: Building medical index (~2 mins)..."):
         os.system("python medical_rag.py")
     with st.spinner("Building compliance index (~5–7 mins, 39k chunks)..."):
         os.system("python compliance_rag.py")
-    st.session_state.index_built = True
-    st.success("Setup complete! Refreshing in 3 seconds...")
+    st.session_state["index_built"] = True
+    st.success("Setup complete! Refreshing...")
     st.rerun()
 
 st.set_page_config(page_title="Medical + Policy RAG", layout="wide")
