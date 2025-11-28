@@ -8,6 +8,16 @@ from langchain_core.output_parsers import StrOutputParser
 from transformers import pipeline
 import json
 
+import os
+if "index_built" not in st.session_state.get("index_built", False):
+    with st.spinner("First time setup: Building medical index (~2 mins)..."):
+        os.system("python medical_rag.py")
+    with st.spinner("Building compliance index (~5–7 mins, 39k chunks)..."):
+        os.system("python compliance_rag.py")
+    st.session_state.index_built = True
+    st.success("Setup complete! Refreshing in 3 seconds...")
+    st.rerun()
+
 st.set_page_config(page_title="Medical + Policy RAG", layout="wide")
 st.title("Medical QA + Contract Compliance Checker")
 st.markdown("**Task 1**: Medical RAG | **Task 2**: Compliance Checker (510 CUAD contracts)")
