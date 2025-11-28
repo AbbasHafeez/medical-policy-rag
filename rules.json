@@ -1,0 +1,17 @@
+[
+  {"id": 1, "rule": "Is there a Governing Law clause?"},
+  {"id": 2, "rule": "Is there a Notice Period for termination?"},
+  {"id": 3, "rule": "Is assignment allowed without consent?"},
+  {"id": 4, "rule": "Is there a Confidentiality clause?"},
+  {"id": 5, "rule": "Is there a Non-compete clause?"},
+  {"id": 6, "rule": "Is there an Indemnification clause?"},
+  {"id": 7, "rule": "Is there a Limitation of Liability?"},
+  {"id": 8, "rule": "Is payment terms clearly defined?"},
+  {"id": 9, "rule": "Is there a Force Majeure clause?"},
+  {"id": 10, "rule": "Is there a Dispute Resolution method?"},
+  {"id": 11, "rule": "Are warranties provided?"},
+  {"id": 12, "rule": "Is there an Exclusivity clause?"},
+  {"id": 13, "rule": "Are intellectual property rights defined?"},
+  {"id": 14, "rule": "Is there a Severability clause?"},
+  {"id": 15, "rule": "Is the contract duration specified?"}
+]
