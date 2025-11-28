@@ -8,16 +8,25 @@ from langchain_core.output_parsers import StrOutputParser
 from transformers import pipeline
 import json
 
+import streamlit as st
 import os
-if not st.session_state.get("index_built", False):
-    with st.spinner("First time setup: Building medical index (~2 mins)..."):
-        os.system("python medical_rag.py")
-    with st.spinner("Building compliance index (~5–7 mins, 39k chunks)..."):
-        os.system("python compliance_rag.py")
-    st.session_state["index_built"] = True
-    st.success("Setup complete! Refreshing...")
-    st.rerun()
 
+# ────────────────────── FIRST TIME SETUP ONLY ──────────────────────
+if not os.path.exists("vectorstore/medical_index") or not os.path.exists("vectorstore/compliance_index"):
+    st.warning("First time setup — building vector indexes (6–8 minutes one time only)...")
+    st.info("Please wait — this runs only once!")
+
+    with st.spinner("Building Medical Index..."):
+        os.system("python medical_rag.py")
+    with st.spinner("Building Compliance Index (39k chunks)..."):
+        os.system("python compliance_rag.py")
+
+    st.success("Setup complete! App is ready!")
+    st.balloons()
+    st.rerun()
+# Silence harmless warnings
+import warnings
+warnings.filterwarnings("ignore")
 st.set_page_config(page_title="Medical + Policy RAG", layout="wide")
 st.title("Medical QA + Contract Compliance Checker")
 st.markdown("**Task 1**: Medical RAG | **Task 2**: Compliance Checker (510 CUAD contracts)")
